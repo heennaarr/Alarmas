@@ -4,9 +4,14 @@
 
 
     <item
-        android:id="@+id/more"
-        android:title="@string/more"
-        android:contentDescription="@string/more"
+        android:id="@+id/edit"
+        android:title="@string/editar"
+        android:contentDescription="@string/editar"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/config"
+        android:title="@string/ajustes"
+        android:contentDescription="@string/ajustes"
         app:showAsAction="never" />
 
 </menu>
