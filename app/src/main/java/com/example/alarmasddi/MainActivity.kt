@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import android.widget.TextView
+import android.widget.Toast
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
             findViewById<SwitchMaterial>(R.id.switch6),
             findViewById<SwitchMaterial>(R.id.switch7)
         )
+        val button = findViewById<FloatingActionButton>(R.id.floating_action_button)
 
         switches.forEachIndexed { index, materialSwitch ->
             val timeView = timeViews[index]
@@ -54,17 +57,40 @@ class MainActivity : AppCompatActivity() {
 
             materialSwitch.setOnCheckedChangeListener { _, isChecked ->
                 updateViewColors(isChecked, timeView, textView)
+                toast(isChecked,textView)
+            }
+            button.setOnClickListener {
+                val text = "Añadir alarma"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(this, text, duration) // in Activity
+                toast.show()
             }
         }
     }
 
     private fun updateViewColors(isChecked: Boolean, timeView: TextView, textView: TextView) {
         if (isChecked) {
-            timeView.setTextColor(ContextCompat.getColor(this, android.R.color.black)) // Negro
-            textView.setTextColor(ContextCompat.getColor(this, android.R.color.black)) // Negro
+            timeView.setTextColor(ContextCompat.getColor(this, android.R.color.black))
+            textView.setTextColor(ContextCompat.getColor(this, android.R.color.black))
+
         } else {
-            timeView.setTextColor(ContextCompat.getColor(this, R.color.gris)) // Gris claro
-            textView.setTextColor(ContextCompat.getColor(this, R.color.gris)) // Gris claro
+            timeView.setTextColor(ContextCompat.getColor(this, R.color.gris))
+            textView.setTextColor(ContextCompat.getColor(this, R.color.gris))
         }
+    }
+
+    private fun toast(isChecked: Boolean, textView: TextView) {
+        if (isChecked) {
+            val text = "Alarma ${textView.text} activada"
+            val duration = Toast.LENGTH_SHORT
+            val toast = Toast.makeText(this, text, duration) // in Activity
+            toast.show()
+        } else {
+            val text = "Alarma ${textView.text} desactivada"
+            val duration = Toast.LENGTH_SHORT
+            val toast = Toast.makeText(this, text, duration) // in Activity
+            toast.show()
+        }
+
     }
 }
